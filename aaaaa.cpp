@@ -8,7 +8,7 @@
 #define pinLedVerm 10
 
 // DEFINIÇÃO DE PARAMETROS
-#define distObstaculo 10 // DISTANCIA EM CM PARA CONSIDERAR QUE HÁ OBSTÁCULO A FRENTE
+#define distObstaculo 40 // DISTANCIA EM CM PARA CONSIDERAR QUE HÁ OBSTÁCULO A FRENTE
 #define distMin 5
 #define distMax 50
 #define tempoLeitura 100 // INTERVALO MINIMO ENTRE CADA LEITURA
@@ -18,12 +18,12 @@
 // DECLARAÇÃO DE VARIÁVEIS
 boolean reset = false;
 boolean flag = false;
+
 boolean contando = false;
 boolean obstaculo = false;
-boolean parar = false;
-boolean piscaAmarelo = false;
+
 byte tempo;
-byte contaObstaculo = 0;
+
 unsigned long controleLeitura; // VARIÁVEL PARA CONTROLAR TEMPO ENTRE AS LEITURAS
 
 // INSTANCIANDO OBJETOS
@@ -54,68 +54,86 @@ void loop()
     printf("%f", sensorHCSR04.dist());
     if (reset)
     {
-        while (sensorHCSR04.dist() > distObstaculo && flag)
+        if (sensorHCSR04.dist() > distObstaculo && contando == false)
         {
+            Serial.print("Agurdando cubo na base");
+            while (sensorHCSR04.dist() > distObstaculo && contando == false)
+            {
+                flag = false;
+                // Serial.print("Agurdando cubo na base");
+                digitalWrite(pinLedA, HIGH);
+                delay(100);
+                digitalWrite(pinLedVerde, LOW);
+                digitalWrite(pinLedVerm, LOW);
+                digitalWrite(pinLedA, LOW);
+                delay(100);
+            }
+        }
 
-            Serial.print("Contando");
+        if (sensorHCSR04.dist() <= distObstaculo && contando == false)
+        {
+            Serial.println("Cubo na base");
+            while (sensorHCSR04.dist() <= distObstaculo && contando == false)
+            {
+                flag = true;
+
+                digitalWrite(pinLedA, HIGH);
+            }
+        }
+
+        // digitalWrite(pinLedVerde, LOW);
+        // digitalWrite(pinLedVerm, LOW);
+        // digitalWrite(pinLedA, LOW);
+
+        if (sensorHCSR04.dist() > distObstaculo && flag)
+        {
 
             digitalWrite(pinLedVerde, HIGH);
 
+            controleLeitura = millis();
+            Serial.print("Tempo:");
+            Serial.println(millis() - controleLeitura);
+
+            delay(500);
             digitalWrite(pinLedA, LOW);
             digitalWrite(pinLedVerm, LOW);
             contando = true;
+            while (sensorHCSR04.dist() > distObstaculo && flag)
+            {
+                Serial.print("Tempo:");
+                Serial.println(millis() - controleLeitura);
+            }
         }
         if (sensorHCSR04.dist() <= distObstaculo && contando)
         {
             flag = false;
-            Serial.print("PAROUUU");
 
+            Serial.println("PAROUUU");
+            Serial.print("Tempo final:");
+            Serial.println(millis() - controleLeitura);
             digitalWrite(pinLedVerde, LOW);
 
             digitalWrite(pinLedA, LOW);
             digitalWrite(pinLedVerm, HIGH);
-        }
-        // digitalWrite(pinLedVerde, LOW);
-        // digitalWrite(pinLedVerm, LOW);
-        // digitalWrite(pinLedA, LOW);
-        while (sensorHCSR04.dist() > distObstaculo && contando == false)
-        {
-            Serial.print("Agurdando cubo na base");
-            digitalWrite(pinLedA, HIGH);
-            delay(100);
-            digitalWrite(pinLedVerde, LOW);
-            digitalWrite(pinLedVerm, LOW);
-            digitalWrite(pinLedA, LOW);
-            delay(100);
-        }
-        if (sensorHCSR04.dist() <= distObstaculo && contando == false)
-        {
-            flag = true;
-            Serial.print("Cubo na base");
-
-            digitalWrite(pinLedA, HIGH);
+            reset = false;
         }
     }
     else
     {
-
-        Serial.println("Aguardando reset");
-        while (sensorHCSR04.dist() > distMin)
+        flag = false;
+        reset = false;
+        if (sensorHCSR04.dist() > distMin)
         {
+            // Serial.println("Aguardando reset");
 
             digitalWrite(pinLedA, LOW);
             digitalWrite(pinLedVerde, LOW);
             digitalWrite(pinLedVerm, HIGH);
-            if (sensorHCSR04.dist() <= distMin)
-            {
-                Serial.println("Aquii");
-                break;
-            }
         }
-        flag = false;
-        Serial.println("Reset?");
+
         while (sensorHCSR04.dist() <= distMin)
         {
+            // Serial.println("Reset?");
             digitalWrite(pinLedVerm, HIGH);
             delay(400);
             digitalWrite(pinLedVerde, LOW);
@@ -124,16 +142,15 @@ void loop()
             delay(200);
             if (sensorHCSR04.dist() > distMin)
             {
-                Serial.println("Passou aqui?");
+
                 flag = true;
             }
         }
         if (flag && sensorHCSR04.dist() > distMin)
         {
-            Serial.println("Passando aqui?");
-
+            Serial.println("Resetado");
             reset = true;
-
+            contando = false;
             flag = false;
         }
     }
