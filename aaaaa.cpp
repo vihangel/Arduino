@@ -73,6 +73,7 @@ void loop()
         if (sensorHCSR04.dist() <= distObstaculo && contando == false)
         {
             Serial.println("Cubo na base");
+            delay(500);
             while (sensorHCSR04.dist() <= distObstaculo && contando == false)
             {
                 flag = true;
@@ -90,18 +91,18 @@ void loop()
 
             digitalWrite(pinLedVerde, HIGH);
 
-            controleLeitura = millis();
-            Serial.print("Tempo:");
-            Serial.println(millis() - controleLeitura);
+            controleLeitura = millis()-1000;
+            Serial.print("Tempo inicial: ");
+            Serial.println(millis());
+            Serial.println(controleLeitura);
 
-            delay(500);
             digitalWrite(pinLedA, LOW);
             digitalWrite(pinLedVerm, LOW);
             contando = true;
+            delay(1000);
             while (sensorHCSR04.dist() > distObstaculo && flag)
             {
-                Serial.print("Tempo:");
-                Serial.println(millis() - controleLeitura);
+                   delay(100);
             }
         }
         if (sensorHCSR04.dist() <= distObstaculo && contando)
