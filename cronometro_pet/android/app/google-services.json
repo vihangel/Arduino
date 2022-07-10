@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "398887128767",
+    "project_id": "pet-app-aeb7b",
+    "storage_bucket": "pet-app-aeb7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398887128767:android:85c18697302c038317000a",
+        "android_client_info": {
+          "package_name": "com.example.cronometro_pet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398887128767-ip6oh2leh9k01u4mf7r2omejgtr53ut6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzOOCWA1xLzjA1qcqo8q3srBafbW6CoF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398887128767-ip6oh2leh9k01u4mf7r2omejgtr53ut6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
