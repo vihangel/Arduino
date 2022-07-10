@@ -6,11 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../shared/resources/colors.dart';
 import '../login/controller/login_controller.dart';
 import 'controller/home_controller.dart';
-import 'main/main_controller.dart';
-import 'main/main_page.dart';
 
 HomeController controller = Modular.get<HomeController>();
-MainController mainController = Modular.get<MainController>();
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -19,7 +16,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mainController.updateUser();
     final size = MediaQuery.of(context).size;
     return Observer(builder: (context) {
       return Scaffold(
@@ -33,20 +29,20 @@ class HomePage extends StatelessWidget {
           onTap: controller.updateIndex,
           items: const [
             BottomNavigationBarItem(
-              label: "Home",
-              icon: Icon(FontAwesomeIcons.house),
-            ),
-            BottomNavigationBarItem(
-              activeIcon: Icon(FontAwesomeIcons.solidHeart),
-              label: "Matchs",
-              icon: Icon(FontAwesomeIcons.heart),
-            ),
-            //Colocaar o rostinho da pessoa
-            BottomNavigationBarItem(
               activeIcon: Icon(FontAwesomeIcons.solidCircleUser),
               label: "Perfil",
               icon: Icon(FontAwesomeIcons.circleUser),
             ),
+            BottomNavigationBarItem(
+              label: "Home",
+              icon: Icon(FontAwesomeIcons.clock),
+            ),
+            BottomNavigationBarItem(
+              activeIcon: Icon(FontAwesomeIcons.clockRotateLeft),
+              label: "Historico",
+              icon: Icon(FontAwesomeIcons.clockRotateLeft),
+            ),
+            //Colocaar o rostinho da pessoa
           ],
         ),
         body: SafeArea(
