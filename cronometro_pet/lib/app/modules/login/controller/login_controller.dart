@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -24,7 +22,8 @@ abstract class _LoginControllerBase with Store {
       //Nao pode usar pop nessa navegação pois o pop não funciona como o back
       Modular.to.pushNamed("/home/");
     } catch (e, s) {
-      log('Error ao realizar login, error: $e, stack: $s');
+      print('Error ao realizar login, error: $e, stack: $s');
+      AsukaSnackbar.success('Error ao realizar login, error: $e').show();
     }
   }
 }

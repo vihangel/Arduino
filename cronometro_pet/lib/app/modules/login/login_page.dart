@@ -110,7 +110,9 @@ class LoginPage extends StatelessWidget {
                                   SizedBox(
                                     width: size.width * 0.7,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        controller.signIn();
+                                      },
                                       child: const Icon(
                                         FontAwesomeIcons.google,
                                         color: Colors.white,

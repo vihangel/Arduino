@@ -29,6 +29,13 @@
             {
               "client_id": "398887128767-ip6oh2leh9k01u4mf7r2omejgtr53ut6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "398887128767-ng98fhbj89u2r0q2d40ga5agd448612e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cronometroPet"
+              }
             }
           ]
         }
