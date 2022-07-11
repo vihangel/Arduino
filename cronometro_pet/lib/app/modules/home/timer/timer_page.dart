@@ -44,7 +44,7 @@ class TimerPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Flexible(
-                  flex: 2,
+                  flex: 8,
                   child: Container(
                     width: size.width * 0.8,
                     height: size.width * 0.8,
@@ -85,7 +85,7 @@ class TimerPage extends StatelessWidget {
                 ),
                 controller.isActived
                     ? Flexible(
-                        flex: 1,
+                        flex: 4,
                         child: SizedBox(
                           width: size.width * 0.8,
                           child: ElevatedButton(
@@ -107,7 +107,7 @@ class TimerPage extends StatelessWidget {
                         ),
                       )
                     : Flexible(
-                        flex: 1,
+                        flex: 4,
                         child: SizedBox(
                           width: size.width * 0.8,
                           child: ElevatedButton(
@@ -118,6 +118,28 @@ class TimerPage extends StatelessWidget {
                           ),
                         ),
                       ),
+                controller.stop
+                    ? Flexible(
+                        flex: 1,
+                        child: SizedBox(
+                          width: size.width * 0.8,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green.shade400,
+                              elevation: 0,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: const Text("salvar tempo"),
+                          ),
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           ),
