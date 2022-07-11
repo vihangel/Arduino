@@ -15,7 +15,7 @@ class TimerPage extends StatelessWidget {
     return Observer(builder: (context) {
       return GestureDetector(
         onTap: () {
-          print("GestureDetector");
+          controller.start();
         },
         child: Scaffold(
           appBar: AppBar(
@@ -50,18 +50,34 @@ class TimerPage extends StatelessWidget {
                     height: size.width * 0.8,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: ColorsApp.primary, width: 3),
+                      border: Border.all(color: ColorsApp.primary, width: 5),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Stack(
                       children: [
-                        Text(
-                          controller.time,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 64,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey.shade800),
+                        Center(
+                          child: Container(
+                            width: size.width * 0.75,
+                            height: size.width * 0.75,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: controller.isActived
+                                    ? Colors.red.shade400
+                                    : Colors.yellow,
+                                width: 5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Text(
+                            controller.time,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 64,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade800),
+                          ),
                         ),
                       ],
                     ),

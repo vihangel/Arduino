@@ -32,9 +32,7 @@ abstract class _TimerControllerBase with Store {
       mili = 0;
       second = 0;
       minute = 0;
-      print("pAROU");
     } else {
-      print("AAA");
       stop = false;
       isActived = true;
     }
