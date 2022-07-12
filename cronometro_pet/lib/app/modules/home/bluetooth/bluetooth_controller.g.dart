@@ -85,6 +85,21 @@ mixin _$BluetoothController on _BluetoothControllerBase, Store {
     });
   }
 
+  final _$isConnectedAtom = Atom(name: '_BluetoothControllerBase.isConnected');
+
+  @override
+  bool get isConnected {
+    _$isConnectedAtom.reportRead();
+    return super.isConnected;
+  }
+
+  @override
+  set isConnected(bool value) {
+    _$isConnectedAtom.reportWrite(value, super.isConnected, () {
+      super.isConnected = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -92,7 +107,8 @@ isActived: ${isActived},
 time: ${time},
 devices: ${devices},
 deviceChoosed: ${deviceChoosed},
-loading: ${loading}
+loading: ${loading},
+isConnected: ${isConnected}
     ''';
   }
 }

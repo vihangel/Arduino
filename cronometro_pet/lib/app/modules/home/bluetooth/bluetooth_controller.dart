@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:asuka/asuka.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
@@ -26,8 +27,12 @@ abstract class _BluetoothControllerBase with Store {
   @observable
   bool loading = false;
 
+  @observable
+  bool isConnected = false;
+
   void searchDevices() {
     loading = true;
+    deviceChoosed!.disconnect();
     // Start scanning
     flutterBlue.startScan(timeout: Duration(seconds: 4));
 
@@ -45,10 +50,36 @@ abstract class _BluetoothControllerBase with Store {
     });
   }
 
-  Future<void> connectDevice() async {
+  Future<void> connectDevice(BluetoothDevice device) async {
     // Disconnect from device
-    deviceChoosed!.disconnect();
+    // deviceChoosed!.disconnect();
     // Connect to the device
-    await deviceChoosed!.connect();
+    deviceChoosed = device;
+    try {
+      await deviceChoosed!.connect();
+      AsukaSnackbar.success('Conectado com sucesso!');
+      isConnected = true;
+      listener();
+    } on Exception catch (e) {
+      print("Bletooth error to connect: $e");
+    }
+  }
+
+  Future<void> listener() async {
+    List<BluetoothService> services = await deviceChoosed!.discoverServices();
+    services.forEach((service) async {
+      // do something with service]
+      var characteristics = service.characteristics;
+      for (BluetoothCharacteristic c in characteristics) {
+        List<int> value = await c.read();
+        print(value);
+        await c.setNotifyValue(true);
+        c.value.listen((value) {
+          print(value);
+          // do something with new value
+        });
+      }
+    });
+    // Reads all characteristics
   }
 }

@@ -26,7 +26,7 @@ class BluetoothPage1 extends StatelessWidget {
           children: [
             const Padding(
               padding: EdgeInsets.all(30.0),
-              child: const Text('Procure a rede do Arduino'),
+              child: Text('Procure a rede do Arduino'),
             ),
             SizedBox(
               height: size.height * 0.6,
@@ -36,6 +36,9 @@ class BluetoothPage1 extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                       child: ListTile(
+                        onTap: () {
+                          controller.connectDevice(controller.devices[index]);
+                        },
                         title: Text(controller.devices[index].name),
                         subtitle:
                             Text(controller.devices[index].type.toString()),
