@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../bluetooth/pages/bluetooth_page1.dart';
+
 TimerController controller = Modular.get<TimerController>();
 
 class TimerPage extends StatelessWidget {
@@ -19,6 +21,7 @@ class TimerPage extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
@@ -31,7 +34,10 @@ class TimerPage extends StatelessWidget {
                   Icons.bluetooth,
                   color: Colors.grey.shade800,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Modular.to.push(MaterialPageRoute(
+                      builder: (context) => BluetoothPage1()));
+                },
               ),
             ],
           ),

@@ -68,6 +68,7 @@ dependencies:
   google_fonts: ^3.0.1
   flutter_svg: ^1.0.3
   retrofit_generator: ^3.0.1+1
+  flutter_blue: ^0.8.0
   
   
 dev_dependencies:

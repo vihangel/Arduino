@@ -1,3 +1,4 @@
+import 'package:cronometro_pet/app/modules/home/bluetooth/bluetooth_controller.dart';
 import 'package:cronometro_pet/app/modules/home/timer/timer_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -9,6 +10,7 @@ class HomeModule extends Module {
   final List<Bind> binds = [
     Bind.lazySingleton((i) => HomeController()),
     Bind.lazySingleton((i) => TimerController()),
+    Bind.lazySingleton((i) => BluetoothController()),
   ];
 
   @override
