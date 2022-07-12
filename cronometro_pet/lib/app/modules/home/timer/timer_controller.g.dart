@@ -106,6 +106,20 @@ mixin _$TimerController on _TimerControllerBase, Store {
     return _$startAsyncAction.run(() => super.start());
   }
 
+  final _$_TimerControllerBaseActionController =
+      ActionController(name: '_TimerControllerBase');
+
+  @override
+  void save() {
+    final _$actionInfo = _$_TimerControllerBaseActionController.startAction(
+        name: '_TimerControllerBase.save');
+    try {
+      return super.save();
+    } finally {
+      _$_TimerControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

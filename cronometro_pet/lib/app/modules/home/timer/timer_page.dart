@@ -127,22 +127,89 @@ class TimerPage extends StatelessWidget {
                 controller.stop
                     ? Flexible(
                         flex: 1,
-                        child: SizedBox(
-                          width: size.width * 0.8,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.green.shade400,
-                              elevation: 0,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 15,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: size.width * 0.8,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: size.width * 0.2,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red.shade400,
+                                        elevation: 0,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 15,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: const Text("+2"),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: size.width * 0.2,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red.shade400,
+                                        elevation: 0,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 15,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: const Text("DNF"),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: size.width * 0.2,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.green.shade400,
+                                        elevation: 0,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 15,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: const Text("Editar"),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            onPressed: () {},
-                            child: const Text("salvar tempo"),
-                          ),
+                            // SizedBox(
+                            //   width: size.width * 0.8,
+                            //   child: ElevatedButton(
+                            //     style: ElevatedButton.styleFrom(
+                            //       primary: Colors.green.shade400,
+                            //       elevation: 0,
+                            //       padding: const EdgeInsets.symmetric(
+                            //         vertical: 15,
+                            //       ),
+                            //       shape: RoundedRectangleBorder(
+                            //         borderRadius: BorderRadius.circular(100),
+                            //       ),
+                            //     ),
+                            //     onPressed: () {},
+                            //     child: const Text("Editar"),
+                            //   ),
+                            // ),
+                          ],
                         ),
                       )
                     : Container(),

@@ -1,4 +1,5 @@
 import 'package:cronometro_pet/app/app_module.dart';
+import 'package:cronometro_pet/app/models/timer/timer_model.dart';
 import 'package:cronometro_pet/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,6 @@ Future<void> main() async {
 Future<void> initHive() async {
   final pathDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(pathDir.path);
-
+  Hive.registerAdapter<TimerModel>(TimerModelAdapter());
   Hive.registerAdapter<UserModel>(UserModelAdapter());
 }

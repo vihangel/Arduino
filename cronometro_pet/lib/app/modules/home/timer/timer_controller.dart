@@ -25,6 +25,9 @@ abstract class _TimerControllerBase with Store {
   bool stop = false;
 
   @action
+  void save() {}
+
+  @action
   Future<void> start() async {
     if (isActived) {
       isActived = false;
