@@ -175,7 +175,7 @@ class TimerPage extends StatelessWidget {
                                     width: size.width * 0.2,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.green.shade400,
+                                        primary: ColorsApp.primary,
                                         elevation: 0,
                                         padding: const EdgeInsets.symmetric(
                                           vertical: 15,

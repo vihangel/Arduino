@@ -69,6 +69,8 @@ dependencies:
   flutter_svg: ^1.0.3
   retrofit_generator: ^3.0.1+1
   flutter_blue: ^0.8.0
+  flutter_bluetooth_serial: ^0.3.2
+  permission_handler: ^10.0.0
   
   
 dev_dependencies:
