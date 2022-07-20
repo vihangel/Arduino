@@ -1,8 +1,6 @@
 #include <HCSR04.h>
 
-#include <SoftwareSerial.h>
-
-SoftwareSerial hc06(2, 3);
+#include <LiquidCrystal.h>
 // DEFINIÇÕES DE PINOS
 #define pinTrig 8
 #define pinEcho 9
@@ -11,7 +9,9 @@ SoftwareSerial hc06(2, 3);
 #define pinLedVerm 7
 
 // LSD
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 // DEFINIÇÃO DE PARAMETROS
 #define distObstaculo 40 // DISTANCIA EM CM PARA CONSIDERAR QUE HÁ OBSTÁCULO A FRENTE
@@ -37,18 +37,27 @@ HCSR04 sensorHCSR04(pinTrig, pinEcho);
 
 void setup()
 {
-
+#ifdef DEBUG
     Serial.begin(9600);
+    Serial.println(F("| ============================================= |"));
+    Serial.println(F("|           Cronometro de cubo mágico           |"));
+    Serial.println(F("| ============================================= |"));
+#endif
 
     pinMode(pinLedVerde, OUTPUT);
     pinMode(pinLedVerm, OUTPUT);
     pinMode(pinLedA, OUTPUT);
 
-    hc06.begin(9600);
-    Serial.println(F("| ============================================= |"));
-    Serial.println(F("|           Cronometro de cubo mágico           |"));
-    Serial.println(F("| ============================================= |"));
+    lcd.begin(16, 2);
+    lcd.print("| ============================================= |");
+    lcd.print("|           Cronometro de cubo mágico           |");
+    lcd.print("| ============================================= |");
 
+    // Print a message to the LCD.
+
+#ifdef DEBUG
+    Serial.println("Fim do Setup");
+#endif
     delay(2000);
 }
 
@@ -60,8 +69,8 @@ void loop()
     {
         if (sensorHCSR04.dist() > distObstaculo && contando == false)
         {
-            Serial.println("|           Aguardando cubo na base           |");
-       
+            lcd.print("|           Aguardando cubo na base           |");
+            Serial.print("Aguardando cubo na base");
             while (sensorHCSR04.dist() > distObstaculo && contando == false)
             {
                 flag = false;
@@ -77,8 +86,8 @@ void loop()
 
         if (sensorHCSR04.dist() <= distObstaculo && contando == false)
         {
-            Serial.println("|           Cubo na base           |");
-        
+            lcd.print("|           Cubo na base           |");
+            Serial.println("Cubo na base");
             delay(500);
             while (sensorHCSR04.dist() <= distObstaculo && contando == false)
             {
@@ -108,7 +117,7 @@ void loop()
             delay(1000);
             while (sensorHCSR04.dist() > distObstaculo && flag)
             {
-                Serial.println(millis() - controleLeitura);
+                lcd.print(millis() - controleLeitura);
                 delay(100);
             }
         }
@@ -116,9 +125,10 @@ void loop()
         {
             flag = false;
 
-          
-            Serial.println("|           Tempo final:           |");
-            Serial.println(millis() - controleLeitura);
+            Serial.println("PAROUUU");
+            Serial.print("Tempo final:");
+            lcd.print("|           Tempo final:           |");
+            lcd.print(millis() - controleLeitura);
             Serial.println(millis() - controleLeitura);
             digitalWrite(pinLedVerde, LOW);
 
